@@ -5,7 +5,7 @@ import { LlmResponse } from "@/types";
  * GeminiService provides integration with Google's Gemini API
  */
 export class GeminiService {
-  private static apiKey: string = "AIzaSyCWTKPDIrSFF0BvVV4HiGj8hNcVZyKYM8E";
+  private static apiKey: string = "ENTER_API_KEY_HERE";
   
   /**
    * Checks if an API key is set
