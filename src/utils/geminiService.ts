@@ -3,17 +3,9 @@ import { LlmResponse } from "@/types";
 
 /**
  * GeminiService provides integration with Google's Gemini API
- * This is a placeholder implementation that would be replaced with actual API calls
  */
 export class GeminiService {
-  private static apiKey: string | null = null;
-  
-  /**
-   * Stores the API key in memory (in a real application, this would be more secure)
-   */
-  static setApiKey(key: string): void {
-    this.apiKey = key;
-  }
+  private static apiKey: string = "AIzaSyCWTKPDIrSFF0BvVV4HiGj8hNcVZyKYM8E";
   
   /**
    * Checks if an API key is set
@@ -38,17 +30,10 @@ export class GeminiService {
     }
     
     try {
-      // This would be replaced with an actual Gemini API call
-      // For now, this is a placeholder implementation
-      
       // Build the prompt for the LLM
       const prompt = this.buildPrompt(question, context, chatHistory);
       
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // In a real implementation, this would call the Gemini API
-      /*
+      // Make the actual Gemini API call
       const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent', {
         method: 'POST',
         headers: {
@@ -66,16 +51,24 @@ export class GeminiService {
         })
       });
       
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Gemini API error: ${errorData?.error?.message || response.statusText}`);
+      }
+      
       const data = await response.json();
       
       // Extract the response text
-      const generatedText = data.candidates[0].content.parts[0].text;
-      */
-      
-      // For now, return a simulated response
-      return {
-        answer: `This is a simulated response from Gemini about "${question}". In a real implementation, this would be generated using the Google Gemini API based on the context extracted from your URLs.`
-      };
+      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+        return {
+          answer: data.candidates[0].content.parts[0].text
+        };
+      } else {
+        return {
+          answer: "",
+          error: "Invalid response format from Gemini API"
+        };
+      }
     } catch (error) {
       console.error("Error calling Gemini API:", error);
       return {
