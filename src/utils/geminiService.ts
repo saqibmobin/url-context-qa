@@ -34,11 +34,12 @@ export class GeminiService {
       const prompt = this.buildPrompt(question, context, chatHistory);
       
       // Make the actual Gemini API call
-      const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent', {
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.apiKey}`;
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.apiKey}`
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           contents: [
