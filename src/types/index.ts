@@ -11,6 +11,14 @@ export interface ContextData {
   content: string;
   isProcessing: boolean;
   error?: string;
+  metadata?: WebsiteMetadata[];
+}
+
+export interface WebsiteMetadata {
+  url: string;
+  title?: string;
+  description?: string;
+  lastScraped: Date;
 }
 
 export enum ProcessingStatus {
@@ -18,4 +26,17 @@ export enum ProcessingStatus {
   Processing = 'processing',
   Success = 'success',
   Error = 'error'
+}
+
+export interface ScrapedContent {
+  url: string;
+  title?: string;
+  description?: string;
+  content: string;
+  error?: string;
+}
+
+export interface LlmResponse {
+  answer: string;
+  error?: string;
 }

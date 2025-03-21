@@ -7,6 +7,7 @@ import { Message, ProcessingStatus } from "@/types";
 import { cn } from "@/lib/utils";
 import { Send, AlertCircle } from "lucide-react";
 import { generateAnswer } from "@/utils/urlProcessor";
+import { GeminiService } from "@/utils/geminiService";
 import { nanoid } from 'nanoid';
 
 interface ChatInterfaceProps {

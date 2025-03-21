@@ -7,14 +7,15 @@ import { toast } from "sonner";
 import UrlInput from "@/components/UrlInput";
 import ChatInterface from "@/components/ChatInterface";
 import { processUrls } from "@/utils/urlProcessor";
-import { ContextData, ProcessingStatus } from "@/types";
+import { ContextData, ProcessingStatus, WebsiteMetadata } from "@/types";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState<string>("urls");
   const [contextData, setContextData] = useState<ContextData>({
     urls: [],
     content: "",
-    isProcessing: false
+    isProcessing: false,
+    metadata: []
   });
   const [status, setStatus] = useState<ProcessingStatus>(ProcessingStatus.Idle);
 
@@ -29,7 +30,8 @@ const Index = () => {
         setContextData({
           urls,
           content: result.content,
-          isProcessing: false
+          isProcessing: false,
+          metadata: result.metadata || []
         });
         setStatus(ProcessingStatus.Success);
         toast.success("URLs processed successfully", {
@@ -67,7 +69,8 @@ const Index = () => {
       urls: [],
       content: "",
       isProcessing: false,
-      error: undefined
+      error: undefined,
+      metadata: []
     });
     setStatus(ProcessingStatus.Idle);
     toast.info("Reset complete", {
